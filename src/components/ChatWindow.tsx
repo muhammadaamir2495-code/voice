@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { Send, Smile, Paperclip, MoreVertical, Phone } from 'lucide-react';
+import { Send, Smile, Paperclip, MoreVertical, Phone, ArrowLeft } from 'lucide-react';
 import { Conversation } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ChatWindowProps {
   conversation: Conversation | null;
   onSendMessage: (text: string) => void;
+  onBack?: () => void;
 }
 
-const ChatWindow = ({ conversation, onSendMessage }: ChatWindowProps) => {
+const ChatWindow = ({ conversation, onSendMessage, onBack }: ChatWindowProps) => {
   const [inputValue, setInputValue] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -38,23 +39,31 @@ const ChatWindow = ({ conversation, onSendMessage }: ChatWindowProps) => {
   }
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-white dark:bg-[#1a1c1e] relative z-0">
+    <div className="flex-1 flex flex-col h-full bg-white dark:bg-[#1a1c1e] relative z-0 w-full">
       {/* Header */}
-      <header className="h-16 px-6 border-b border-google-border dark:border-gray-700 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-full bg-google-blue flex items-center justify-center text-white font-medium">
+      <header className="h-16 px-4 md:px-6 border-b border-google-border dark:border-gray-700 flex items-center justify-between bg-white/80 dark:bg-[#1a1c1e]/80 backdrop-blur-md sticky top-0 z-10">
+        <div className="flex items-center space-x-2 md:space-x-3">
+          {onBack && (
+            <button 
+              onClick={onBack}
+              className="md:hidden p-2 -ml-2 text-google-gray hover:bg-google-light-gray dark:hover:bg-gray-800 rounded-full transition-colors"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </button>
+          )}
+          <div className="w-10 h-10 rounded-full bg-google-blue flex items-center justify-center text-white font-medium shrink-0">
             {conversation.name[0]}
           </div>
-          <div>
-            <h2 className="text-sm font-semibold text-[#202124] dark:text-[#e8eaed] leading-tight">
+          <div className="min-w-0">
+            <h2 className="text-sm font-semibold text-[#202124] dark:text-[#e8eaed] leading-tight truncate">
               {conversation.name}
             </h2>
-            <p className="text-xs text-google-gray dark:text-gray-500">
+            <p className="text-xs text-google-gray dark:text-gray-500 truncate">
               {conversation.number}
             </p>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1 md:space-x-2">
           <button className="p-2 text-google-gray hover:bg-google-light-gray dark:hover:bg-gray-800 rounded-full transition-colors">
             <Phone className="w-5 h-5" />
           </button>
@@ -63,6 +72,7 @@ const ChatWindow = ({ conversation, onSendMessage }: ChatWindowProps) => {
           </button>
         </div>
       </header>
+
 
       {/* Messages */}
       <div 

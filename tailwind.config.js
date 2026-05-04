@@ -18,7 +18,10 @@ export default {
       },
       fontFamily: {
         sans: ['Product Sans', 'Inter', 'system-ui', 'sans-serif'],
-      }
+      },
+      screens: {
+        'xs': '400px',
+      },
     },
   },
   plugins: [],

@@ -136,22 +136,20 @@ const ArchivePage = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center ml-4 space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center ml-2 space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity shrink-0">
                   <button 
                     onClick={() => handleUnarchive(item.id)}
-                    className="p-2 text-google-gray hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors"
+                    className="p-2 text-google-gray dark:text-gray-400 hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors"
                     title="Restore"
                   >
                     <ArchiveRestore className="w-5 h-5" />
                   </button>
-                  <button className="p-2 text-google-gray hover:text-red-500 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors" title="Delete permanently">
+                  <button className="p-2 text-google-gray dark:text-gray-400 hover:text-red-500 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors hidden sm:block" title="Delete permanently">
                     <Trash2 className="w-5 h-5" />
-                  </button>
-                  <button className="p-2 text-google-gray hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors">
-                    <MoreVertical className="w-5 h-5" />
                   </button>
                 </div>
               </motion.div>
+
             ))}
           </AnimatePresence>
 

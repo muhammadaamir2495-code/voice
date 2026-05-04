@@ -163,25 +163,23 @@ const CallsPage = ({ onRedial }: CallsPageProps) => {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity space-x-1">
+                    <div className="flex items-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity space-x-1 ml-2">
                       <button 
                         onClick={(e) => { e.stopPropagation(); onRedial(call.number); }}
-                        className="p-2 text-google-gray hover:text-green-600 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors"
+                        className="p-2 text-google-gray dark:text-gray-400 hover:text-green-600 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors"
                         title="Call"
                       >
                         <Phone className="w-5 h-5" />
                       </button>
-                      <button className="p-2 text-google-gray hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors" title="Message">
+                      <button className="p-2 text-google-gray dark:text-gray-400 hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors hidden sm:block" title="Message">
                         <MessageSquare className="w-5 h-5" />
                       </button>
-                      <button className="p-2 text-google-gray hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors">
-                        <Info className="w-5 h-5" />
-                      </button>
-                      <button className="p-2 text-google-gray hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors">
+                      <button className="p-2 text-google-gray dark:text-gray-400 hover:text-google-blue rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors hidden lg:block">
                         <MoreVertical className="w-5 h-5" />
                       </button>
                     </div>
                   </motion.div>
+
                 ))}
               </div>
             </div>

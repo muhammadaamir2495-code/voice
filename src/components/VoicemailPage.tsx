@@ -162,16 +162,17 @@ const VoicemailPage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center ml-4 space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center ml-2 space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity shrink-0">
                   <button 
                     onClick={(e) => handleDelete(v.id, e)}
-                    className="p-2 text-google-gray hover:text-red-500 rounded-full transition-colors"
+                    className="p-2 text-google-gray dark:text-gray-400 hover:text-red-500 rounded-full transition-colors"
                   >
                     <Trash2 className="w-5 h-5" />
                   </button>
                   {expandedId === v.id ? <ChevronUp className="w-5 h-5 text-google-gray" /> : <ChevronDown className="w-5 h-5 text-google-gray" />}
                 </div>
               </div>
+
 
               {/* Expanded Content */}
               <AnimatePresence>

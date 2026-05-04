@@ -11,7 +11,7 @@ import SettingsPage from './components/SettingsPage';
 import AudioPage from './components/AudioPage';
 import HelpModal from './components/HelpModal';
 import { TabType } from './types';
-import { Plus, Phone } from 'lucide-react';
+import { Plus, Phone, MessageSquare, Voicemail, Settings } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {
@@ -58,19 +58,22 @@ const App: React.FC = () => {
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   return (
-    <div className="flex h-screen w-full bg-white dark:bg-[#1a1c1e] transition-colors overflow-hidden">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+    <div className="flex h-screen w-full bg-white dark:bg-[#1a1c1e] transition-colors overflow-hidden flex-col md:flex-row">
+      {/* Desktop Sidebar */}
+      <div className="hidden md:block">
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      </div>
       
-      <div className="flex-1 flex flex-col min-w-0 h-full">
+      <div className="flex-1 flex flex-col min-w-0 h-full relative overflow-hidden">
         <Header 
-        isDarkMode={isDarkMode} 
-        toggleDarkMode={toggleDarkMode} 
-        onHelpClick={() => setIsHelpOpen(true)}
-      />
+          isDarkMode={isDarkMode} 
+          toggleDarkMode={toggleDarkMode} 
+          onHelpClick={() => setIsHelpOpen(true)}
+        />
         
-        <main className="flex-1 overflow-hidden relative flex flex-col">
+        <main className="flex-1 overflow-hidden relative flex flex-col pb-16 md:pb-0">
           {activeTab === 'calls' && (
-            <div className="flex-1 flex flex-col md:flex-row h-full overflow-hidden">
+            <div className="flex-1 flex flex-col lg:flex-row h-full overflow-hidden">
               {/* Main Calls Area */}
               <div className="flex-1 overflow-hidden">
                 <CallsPage onRedial={(number) => {
@@ -79,8 +82,8 @@ const App: React.FC = () => {
                 }} />
               </div>
 
-              {/* Dialer Panel (Desktop) */}
-              <div className="hidden md:flex w-96 border-l border-google-border dark:border-gray-700 bg-white dark:bg-[#1a1c1e] flex-col overflow-y-auto">
+              {/* Dialer Panel (Desktop / Large Tablet) */}
+              <div className="hidden lg:flex w-80 xl:w-96 border-l border-google-border dark:border-gray-700 bg-white dark:bg-[#1a1c1e] flex-col overflow-y-auto">
                 <Dialpad 
                   currentNumber={currentNumber} 
                   onDial={handleDial} 
@@ -91,6 +94,7 @@ const App: React.FC = () => {
               </div>
             </div>
           )}
+
 
           {activeTab === 'messages' && (
             <MessagesPage />
@@ -203,11 +207,59 @@ const App: React.FC = () => {
             )}
           </AnimatePresence>
         </main>
+
+        {/* Mobile Bottom Navigation */}
+        <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-[#1a1c1e] border-t border-google-border dark:border-gray-800 flex items-center justify-around px-2 z-40">
+          <MobileNavItem 
+            id="messages" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab} 
+            icon={MessageSquare} 
+            label="Messages" 
+          />
+          <MobileNavItem 
+            id="calls" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab} 
+            icon={Phone} 
+            label="Calls" 
+          />
+          <MobileNavItem 
+            id="voicemail" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab} 
+            icon={Voicemail} 
+            label="Voicemail" 
+          />
+          <MobileNavItem 
+            id="settings" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab} 
+            icon={Settings} 
+            label="Settings" 
+          />
+        </div>
       </div>
 
       <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
     </div>
   );
 };
+
+// Helper component for mobile nav
+const MobileNavItem = ({ id, activeTab, setActiveTab, icon: Icon, label }: any) => (
+  <button 
+    onClick={() => setActiveTab(id)}
+    className={`flex flex-col items-center justify-center flex-1 h-full space-y-1 ${
+      activeTab === id ? 'text-google-blue' : 'text-google-gray dark:text-gray-500'
+    }`}
+  >
+    <div className={`p-1 rounded-full px-4 transition-colors ${activeTab === id ? 'bg-blue-50 dark:bg-blue-900/20' : ''}`}>
+      <Icon className="w-6 h-6" />
+    </div>
+    <span className="text-[10px] font-bold uppercase tracking-tighter">{label}</span>
+  </button>
+);
+
 
 export default App;

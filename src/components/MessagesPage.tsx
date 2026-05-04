@@ -34,8 +34,11 @@ const MessagesPage = () => {
     }));
   };
 
+  const [showChatOnMobile, setShowChatOnMobile] = useState(false);
+
   const handleSelectConversation = (id: string) => {
     setSelectedId(id);
+    setShowChatOnMobile(true);
     // Mark as read
     setConversations(prev => prev.map(conv => 
       conv.id === id ? { ...conv, unreadCount: 0 } : conv
@@ -43,21 +46,38 @@ const MessagesPage = () => {
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden h-full">
-      <ConversationList 
-        conversations={conversations}
-        selectedId={selectedId}
-        onSelect={handleSelectConversation}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+    <div className="flex-1 flex overflow-hidden h-full relative">
+      <div className={cn(
+        "w-full md:w-80 lg:w-96 flex-shrink-0 transition-transform duration-300 md:translate-x-0 h-full",
+        showChatOnMobile ? "-translate-x-full md:translate-x-0 hidden md:flex" : "flex"
+      )}>
+        <ConversationList 
+          conversations={conversations}
+          selectedId={selectedId}
+          onSelect={handleSelectConversation}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+      </div>
       
-      <ChatWindow 
-        conversation={selectedConversation}
-        onSendMessage={handleSendMessage}
-      />
+      <div className={cn(
+        "flex-1 h-full bg-white dark:bg-[#1a1c1e] transition-transform duration-300",
+        showChatOnMobile ? "flex" : "hidden md:flex"
+      )}>
+        <ChatWindow 
+          conversation={selectedConversation}
+          onSendMessage={handleSendMessage}
+          onBack={() => setShowChatOnMobile(false)}
+        />
+      </div>
     </div>
   );
 };
+
+// Simple utility for classes
+function cn(...classes: any[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
 
 export default MessagesPage;
