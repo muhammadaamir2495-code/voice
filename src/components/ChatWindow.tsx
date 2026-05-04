@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Send, Smile, Paperclip, MoreVertical, Phone } from 'lucide-react';
-import { Conversation, Message } from '../types';
+import { Conversation } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ChatWindowProps {

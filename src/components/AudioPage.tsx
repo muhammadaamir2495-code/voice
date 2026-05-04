@@ -5,16 +5,12 @@ import {
   VolumeX, 
   Play, 
   Pause, 
-  Settings2, 
-  Smartphone, 
-  Headphones, 
-  Monitor,
   Music,
   Zap,
   FastForward,
   Mic2
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+
 
 const AudioPage = () => {
   // Device Lists

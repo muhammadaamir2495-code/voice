@@ -46,3 +46,13 @@ export interface Voicemail {
   transcript: string;
   isRead: boolean;
 }
+
+export interface ArchiveItem {
+  id: string;
+  name: string;
+  number: string;
+  type: 'message' | 'call' | 'voicemail';
+  preview: string;
+  timestamp: string;
+}
+

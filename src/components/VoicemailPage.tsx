@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { 
   Play, 
   Pause, 
   Trash2, 
   Search, 
-  MoreVertical, 
   Download, 
   ChevronDown, 
   ChevronUp,
