@@ -6,7 +6,6 @@ import {
   Search, 
   Phone, 
   MessageSquare, 
-  Info, 
   MoreVertical 
 } from 'lucide-react';
 import { CallRecord } from '../types';

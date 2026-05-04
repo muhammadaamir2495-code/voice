@@ -5,7 +5,6 @@ import {
   MessageSquare, 
   Phone, 
   Voicemail as VoicemailIcon,
-  MoreVertical,
   Trash2
 } from 'lucide-react';
 import { ArchiveItem } from '../types';

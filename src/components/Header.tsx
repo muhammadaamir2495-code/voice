@@ -1,4 +1,4 @@
-import { Search, Settings, HelpCircle, Grid, Sun, Moon } from 'lucide-react';
+import { Search, Settings, HelpCircle, Sun, Moon } from 'lucide-react';
 
 interface HeaderProps {
   isDarkMode: boolean;
